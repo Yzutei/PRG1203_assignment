@@ -35,6 +35,9 @@ public class Payment {
     }
 
     public void setPaymentDate(LocalDateTime paymentDate) {
+        if(paymentDate == null){
+        throw new IllegalArgumentException("Payment date cannot be null.");
+    }
         this.paymentDate = paymentDate;
     }
 
@@ -54,6 +57,9 @@ public class Payment {
     }
 
     public void setPaymentMethod(String paymentMethod) {
+    	if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
+    		throw new IllegalArgumentException("Payment method cannot be empty.");
+    	}
         this.paymentMethod = paymentMethod;
     }
 
@@ -63,8 +69,7 @@ public class Payment {
 
     public void setTotal(double total) {
         if (total < 0) {
-            System.out.println("Total cannot be negative.");
-            return;
+            throw new IllegalArgumentException("Total cannot be negative.");
         }
         this.total = total;
     }
@@ -75,8 +80,7 @@ public class Payment {
 
     public void setAmountPaid(double amountPaid) {
         if (amountPaid < 0) {
-            System.out.println("Amount paid cannot be negative.");
-            return;
+        	throw new IllegalArgumentException("Amount paid cannot be negative.");
         }
         this.amountPaid = amountPaid;
     }
@@ -113,6 +117,11 @@ public class Payment {
         System.out.println("========== RECEIPT ==========");
         System.out.println("Payment ID: " + paymentID);
         System.out.println("Date: " + paymentDate);
+
+        if (order != null) {
+        	System.out.println("Order ID: " + order.getOrderID());
+        }
+        
         System.out.println("Payment Method: " + paymentMethod);
         System.out.println("------------------------------");
 
@@ -120,6 +129,7 @@ public class Payment {
             order.displayOrder();
         }
 
+        System.out.println("------------------------------");
         System.out.printf("Total: RM%.2f%n", total);
         System.out.printf("Amount Paid: RM%.2f%n", amountPaid);
         System.out.printf("Change: RM%.2f%n", (amountPaid - total));
