@@ -16,7 +16,7 @@ public class Order {
 	
 	public Order(int orderID) {
 		this();
-		this.orderID = orderID;
+		setOrderID(orderID);
 	}
 	
 	public int getOrderID() {
@@ -24,6 +24,9 @@ public class Order {
 	}
 	
 	public void setOrderID(int orderID) {
+		if(orderID <= 0){
+	        throw new IllegalArgumentException("Order ID must be positive.");
+		}
 		this.orderID = orderID;
 	}
 	
@@ -36,7 +39,7 @@ public class Order {
 	}
 
 	public ArrayList<Item> getItems() {
-		return items;
+		return new ArrayList<>(items);
 	}
 	
 	public int getQuantity(Item item) {
