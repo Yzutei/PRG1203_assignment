@@ -27,6 +27,9 @@ public class Payment {
     }
 
     public void setPaymentID(int paymentID) {
+        if (paymentID <= 0) {
+            throw new IllegalArgumentException("Payment ID must be positive.");
+        }
         this.paymentID = paymentID;
     }
 
