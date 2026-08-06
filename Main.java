@@ -4,6 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
+		//Set up menu
 		List<Item> menu = new ArrayList<>();
 		menu.add(new Food("Nasi Lemak", 8.50, "Coconut rice with sambal, anchovies, peanuts", "Main Course"));
 		menu.add(new Food("Chicken Rice", 8.00, "Steamed chicken with fragrant rice", "Main Course"));
@@ -19,7 +20,22 @@ public class Main {
 		menu.add(new Drink("Iced Coffee", 4.50, "Chilled coffee with milk", "Beverage"));
 		menu.add(new Drink("Soft Drinks", 3.00, "Carbonated soft drink (Coke/Sprite/etc.)", "Beverage"));
 
-		Order order = new Order(101);   //placeholder number 
+		//Ask user for order ID
+		Order order = null;
+		while (order == null) {
+			try {
+				System.out.print("Enter order ID: ");
+				int orderID = input.nextInt();
+				input.nextLine();
+				order = new Order(orderID);
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a numeric order ID.");
+				input.nextLine();
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
 		Payment payment = null;
 		boolean running = true;
 
