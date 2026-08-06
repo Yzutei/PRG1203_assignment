@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+//Represents a customer order
 public class Order {
 	
 	private int orderID;
@@ -38,6 +39,7 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
+	//Returns a copy so callers cannot modify the internal list directly
 	public ArrayList<Item> getItems() {
 		return new ArrayList<>(items);
 	}
@@ -50,6 +52,7 @@ public class Order {
 		return quantities.get(index);
 	}
 
+	//Adds a new item, or increases quantity if it is already in the order
 	public void addItem(Item item, int quantity) {
 		if (item == null) {
 			throw new IllegalArgumentException("Item cannot be null.");
@@ -76,7 +79,8 @@ public class Order {
 		items.remove(item);
 		quantities.remove(index);
 	}
-	
+
+	//Setting quantity to 0 removes the item entirely
 	public void updateQuantity(Item item, int quantity) {
         int index = items.indexOf(item);
         if (index == -1) {
@@ -106,7 +110,8 @@ public class Order {
 		return items.isEmpty();
 
 	}
-	
+
+	//Prints a formatted summary of the order to the console
 	public void displayOrder( ) {
 		System.out.println("===== Order #" + orderID + " =====");
 		System.out.println("Date: " + orderDate);
