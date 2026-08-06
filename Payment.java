@@ -89,6 +89,7 @@ public class Payment {
     }
 
 
+    //Recalculates the total from the order and checks if enough was paid
     public boolean processPayment() {
         try {
             if (order == null) {
